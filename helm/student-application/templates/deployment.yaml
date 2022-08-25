@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: studentinfo
+  labels:
+    app: my-application
+spec:
+  replicas: {{ .Values.replicas.replicaCount }}
+  selector:
+    matchLabels:
+      app: student
+  template:
+    metadata:
+      name: my-application-pod
+      labels:
+        app: student
+    spec:
+      containers:
+        - name: student-app-container
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: {{ .Values.image.repository }}
+          ports:
+          - containerPort: 8000
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}

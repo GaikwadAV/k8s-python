@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: student
+spec:
+  selector: 
+    matchLabels:
+      app: student
+  replicas: 1
+  template:
+    metadata:
+      name: student
+      labels:
+        app: student
+    spec:
+      containers:
+      - name: student
+        imagePullPolicy: Always
+        image: 8177944183/student-info-app:v4
+        ports:
+        - containerPort: 8000
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "300m"
+# 8177944183/management

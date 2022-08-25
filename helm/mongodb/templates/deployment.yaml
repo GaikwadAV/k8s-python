@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: mongodb
+spec:
+  replicas: {{ .Values.replicas.replicaCount }}
+  selector:
+    matchLabels:
+     app: mongodb
+  template:
+    metadata:
+      name: mongodb-pod
+      labels:
+        app: mongodb
+    spec:
+      volumes:
+      - name: local
+        hostPath:
+          path: /data/db
+      containers:
+      - name: mongodb
+        imagePullPolicy: IfNotPresent
+        image: {{ .Values.image.repository }}
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "300m"
+        ports:
+        - containerPort: 27017
+        volumeMounts:
+        - mountPath: /data/db
+          name: local

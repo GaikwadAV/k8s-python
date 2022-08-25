@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: test-ingress-student-app
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: student.example.com
+    http:
+      paths:
+        - pathType: Prefix
+          path: /
+          backend:
+            service:
+              name: myapp-service-test
+              port:
+                number: 8000

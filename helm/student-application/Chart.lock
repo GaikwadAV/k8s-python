@@ -1,0 +1,6 @@
+dependencies:
+- name: mongodb
+  repository: file:///../home/aniket/application/helm/demo/mongodb/
+  version: 0.1.0
+digest: sha256:653a9c4ac1deb2be83913a7b32d6c355270b47025bf557ee911782ba3879acee
+generated: "2022-08-24T15:01:09.133808053+05:30"
